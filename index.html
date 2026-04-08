@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravish Systems | Bespoke Tech</title>
+    <style>
+        :root {
+            --bg-main: #FFFFFF;
+            --bg-cream: #FDFBF7; 
+            --purple-vibrant: #7C3AED;
+            --yellow-glow: #FACC15;
+            --text-dark: #1A1A1A;
+            --text-muted: #666666;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Playfair Display', serif; }
+        body { background-color: var(--bg-main); color: var(--text-dark); -webkit-font-smoothing: antialiased; }
+
+        /* --- Global Styles --- */
+        p, a, button, input { font-family: 'Inter', sans-serif; }
+        
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 5%; position: fixed; width: 100%; top: 0;
+            background: rgba(255, 255, 255, 0.95); z-index: 1000; border-bottom: 1px solid #eee;
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; color: var(--purple-vibrant); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--purple-vibrant); font-weight: 700; }
+
+        /* --- Image-Heavy Layout --- */
+        main { margin-top: 70px; }
+
+        .hero-split {
+            display: grid; grid-template-columns: 1fr 1fr;
+            min-height: 85vh; align-items: center;
+        }
+
+        .hero-text { padding: 0 10%; }
+        .hero-text h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 2rem; }
+        
+        .hero-image {
+            height: 100%; width: 100%;
+            background: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1500') center/cover no-repeat;
+            position: relative;
+        }
+
+        /* The Gold Overlay - matching the luxury feel */
+        .hero-image::after {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .section-padding { padding: 6rem 10%; }
+
+        .image-card-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem; margin-top: 3rem;
+        }
+
+        .img-card {
+            position: relative; overflow: hidden; height: 500px;
+            cursor: pointer; background: var(--bg-cream);
+        }
+
+        .img-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .img-card:hover img { transform: scale(1.05); }
+
+        .img-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+
+        .btn-luxury {
+            background: var(--text-dark); color: white;
+            padding: 1.2rem 3rem; border: none; cursor: pointer;
+            font-size: 0.9rem; letter-spacing: 2px; transition: 0.3s;
+        }
+
+        .btn-luxury:hover { background: var(--purple-vibrant); box-shadow: 8px 8px 0 var(--yellow-glow); }
+
+        /* --- Form Styling --- */
+        .contact-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            background: var(--bg-cream); padding: 4rem;
+        }
+
+        input, textarea {
+            width: 100%; padding: 1.5rem; margin-bottom: 1rem;
+            border: 1px solid #ddd; background: white; font-size: 1rem;
+        }
+
+        .fade-in { animation: fadeIn 1s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .hero-split, .contact-container { grid-template-columns: 1fr; }
+            .hero-image { height: 400px; }
+            .hero-text h1 { font-size: 3rem; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">RAVISH / SYSTEMS</div>
+        <ul class="nav-links">
+            <li><a onclick="route('home')" id="link-home" class="active">HOME</a></li>
+            <li><a onclick="route('bespoke')" id="link-bespoke">COLLECTIONS</a></li>
+            <li><a onclick="route('expertise')" id="link-expertise">EXPERTISE</a></li>
+            <li><a onclick="route('contact')" id="link-contact">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main id="app-root">
+        </main>
+
+    <script>
+        const content = {
+            home: `
+                <div class="fade-in">
+                    <section class="hero-split">
+                        <div class="hero-text">
+                            <p style="letter-spacing: 3px; color: var(--purple-vibrant); margin-bottom: 1rem; font-weight: 600;">ESTABLISHED 2024</p>
+                            <h1>Bespoke Systems, <br><i>Exquisitely</i> Crafted.</h1>
+                            <p style="margin: 2rem 0; color: var(--text-muted); line-height: 1.8;">
+                                We translate complex business logic into fluid, high-end digital experiences. 
+                                Our architecture is built on the pillars of precision, security, and timeless design.
+                            </p>
+                            <button class="btn-luxury" onclick="route('bespoke')">VIEW COLLECTIONS</button>
+                        </div>
+                        <div class="hero-image"></div>
+                    </section>
+
+                    <section class="section-padding">
+                        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Core Expertise</h2>
+                        <center><div style="width: 60px; height: 2px; background: var(--yellow-glow);"></div></center>
+                        
+                        <div class="image-card-grid">
+                            <div class="img-card">
+                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" alt="Tech">
+                                <div class="img-overlay">
+                                    <h3>Enterprise Full Stack</h3>
+                                    <p>Scalable Java & Angular Architectures</p>
+                                </div>
+                            </div>
+                            <div class="img-card">
+                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Design">
+                                <div class="img-overlay">
+                                    <h3>Intelligent UI/UX</h3>
+                                    <p>Crafting the "Feel" of Modern Technology</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `,
+            bespoke: `
+                <section class="section-padding fade-in">
+                    <h2 style="font-size: 3rem;">Bespoke Solutions</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 3rem;">Custom engineering for distinctive brands.</p>
+                    
+                    <div class="image-card-grid">
+                        <div class="img-card" style="height: 600px;">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800">
+                            <div class="img-overlay">
+                                <h3>Production-Grade PWAs</h3>
+                                <p>Offline-first, high-performance applications.</p>
+                            </div>
+                        </div>
+                        <div class="img-card" style="height: 600px;">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800">
+                            <div class="img-overlay">
+                                <h3>Cloud Integration</h3>
+                                <p>Secure AWS & Microservices deployment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+            expertise: `
+                <section class="section-padding fade-in">
+                    <div class="hero-split" style="min-height: 60vh;">
+                        <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800')"></div>
+                        <div class="hero-text">
+                            <h2>The Technical Atelier</h2>
+                            <p style="margin-top: 1.5rem; line-height: 1.8;">
+                                Much like the precision of a luxury invitation, our code is written with attention to every semicolon. 
+                                We specialize in Java Spring Boot, Angular, and advanced database modeling.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            `,
+            contact: `
+                <section class="section-padding fade-in">
+                    <div class="contact-container">
+                        <div>
+                            <h2 style="font-size: 3.5rem;">Let's Create <br><i>Something</i> Iconic.</h2>
+                            <p style="margin-top: 2rem; color: var(--text-muted);">Consultations are by appointment only.</p>
+                        </div>
+                        <div>
+                            <form>
+                                <input type="text" placeholder="Your Name">
+                                <input type="email" placeholder="Email Address">
+                                <textarea placeholder="Describe your vision..." rows="6"></textarea>
+                                <button class="btn-luxury" style="width: 100%;">SEND INQUIRY</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            `
+        };
+
+        function route(page) {
+            const root = document.getElementById('app-root');
+            root.innerHTML = content[page];
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+            document.getElementById(`link-${page}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        window.onload = () => route('home');
+    </script>
+</body>
+</html>
